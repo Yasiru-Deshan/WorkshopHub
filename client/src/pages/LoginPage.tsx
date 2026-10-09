@@ -17,7 +17,7 @@ export default function LoginPage() {
     try {
       const { data } = await api.post('/auth/login', { email, password });
       login(data.accessToken, data.user);
-      navigate('/workshops');
+      navigate('/');
     } catch (err: any) {
       toast.error(err.response?.data?.message || 'Invalid credentials');
     } finally {

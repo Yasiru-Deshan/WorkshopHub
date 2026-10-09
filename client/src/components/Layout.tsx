@@ -24,7 +24,7 @@ export default function Layout() {
     navigate('/login');
   }
 
-  const canSeeUsers = user?.role === 'ADMIN';
+  const isAdmin = user?.role === 'ADMIN';
 
   return (
     <div className="app-layout">
@@ -35,13 +35,13 @@ export default function Layout() {
         </div>
 
         <nav className="sidebar-nav">
-          {navItems.map(({ to, icon: Icon, label }) => (
+          {!isAdmin && navItems.map(({ to, icon: Icon, label }) => (
             <NavLink key={to} to={to} className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
               <Icon size={18} />
               <span>{label}</span>
             </NavLink>
           ))}
-          {canSeeUsers && (
+          {isAdmin && (
             <NavLink to="/users" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
               <Users size={18} />
               <span>Users</span>
